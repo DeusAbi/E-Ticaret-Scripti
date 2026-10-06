@@ -1,0 +1,11 @@
+# Proje kök dizini web kökü olarak kullanılıyorsa (paylaşımlı hosting)
+# tüm istekleri public/ klasörüne yönlendirir.
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(app|config|database|storage)(/|$) - [F,L]
+    RewriteRule ^(\.git|\.env|composer\.(json|lock)|README\.md) - [F,L]
+    RewriteRule ^$ public/ [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+</IfModule>
